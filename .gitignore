@@ -1,4 +1,6 @@
+# 직접 추가한 내용
 out/
+src/resources/
 
 *.class
 

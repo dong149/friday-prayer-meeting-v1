@@ -3,21 +3,28 @@ package dao;
 
 import model.ChangDae;
 
+import java.io.FileReader;
+import java.io.IOException;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.util.ArrayList;
+import java.util.Properties;
 
 public class ChangDaeDAO {
     private Connection conn;
     private ResultSet rs;
 
-    public ChangDaeDAO() {
+//    properties.load(new FileReader("../resources/application.properties"));
+
+    public ChangDaeDAO() throws IOException {
+        Properties properties = new Properties();
+        properties.load(new FileReader("../resources/application.properties"));
         try {
-            String dbURL = "jdbc:mariadb://localhost:3306/dong149";
-            String dbID = "dong149";
-            String dbPassword = "smith9289!";
+            String dbURL = (String) properties.get("dbURL");
+            String dbID = (String) properties.get("dbID");
+            String dbPassword = (String) properties.get("dbPassword");
             Class.forName("org.mariadb.jdbc.Driver");
             this.conn = DriverManager.getConnection(dbURL, dbID, dbPassword);
         } catch (Exception var4) {
@@ -35,7 +42,7 @@ public class ChangDaeDAO {
             pstmt.setString(1, "%" + userID + "%");
             this.rs = pstmt.executeQuery();
 
-            while(this.rs.next()) {
+            while (this.rs.next()) {
                 ChangDae changDae = new ChangDae();
                 changDae.setBbsID(this.rs.getInt(1));
                 changDae.setBbsTitle(this.rs.getString(2));
@@ -185,7 +192,7 @@ public class ChangDaeDAO {
             pstmt.setInt(1, this.getNext() - (pageNumber - 1) * 10 - unAvail - BonusUnAvailable);
             this.rs = pstmt.executeQuery();
 
-            while(this.rs.next()) {
+            while (this.rs.next()) {
                 ChangDae changDae = new ChangDae();
                 changDae.setBbsID(this.rs.getInt(1));
                 changDae.setBbsTitle(this.rs.getString(2));
@@ -214,7 +221,7 @@ public class ChangDaeDAO {
             pstmt.setString(2, temp2);
             this.rs = pstmt.executeQuery();
 
-            while(this.rs.next()) {
+            while (this.rs.next()) {
                 ChangDae changDae = new ChangDae();
                 changDae.setBbsID(this.rs.getInt(1));
                 changDae.setBbsTitle(this.rs.getString(2));
