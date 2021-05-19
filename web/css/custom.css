@@ -1,0 +1,11 @@
+@import url(http://fonts.googleapis.com/earlyaccess/nanumgothic.css);
+@import url(http://fonts.googleapis.com/earlyaccess/hanna.css);
+@import url('https://fonts.googleapis.com/css?family=Do+Hyeon');
+body {
+	font-family: 'Do Hyeon', sans-serif;
+	font-size: 20px;
+}
+h1{
+	font-family: 'Hanna';
+	font-size: 60px;
+}
